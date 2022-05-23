@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script src="https://unpkg.com/vue@3"></script>
+
+    <template id="myapp">
+      <h2>{{message}}</h2>
+      <div @click="divClick">
+        <!-- .stop 阻止冒泡-->
+        <button @click.stop="btnClick">按钮</button>
+      </div>
+    </template>
+
+    <script>
+      const App = {
+        template: '#myapp',
+        data() {
+          return {
+            message: 'wkb',
+          }
+        },
+        methods: {
+          divClick() {
+            console.log('divClick')
+          },
+          btnClick() {
+            console.log('btnClick')
+          },
+        },
+      }
+
+      Vue.createApp(App).mount('#app')
+    </script>
+  </body>
+</html>

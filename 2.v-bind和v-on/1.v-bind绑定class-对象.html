@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+
+    <style>
+      .active {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script src="https://unpkg.com/vue@3"></script>
+
+    <template id="myapp">
+      <!-- 对象 -->
+      <a :href="link" class="aaa" :class="{active: isActive}">百度</a>
+      <button @click="toggle">切换</button>
+
+      <!-- 将对象放到单独的属性中 -->
+      <a :href="link" class="aaa" :class="classObj">百度</a>
+
+      <!-- 放到函数或者是计算属性中 -->
+      <a :href="link" class="aaa" :class="getClassObj()">百度</a>
+    </template>
+
+    <script>
+      const App = {
+        template: '#myapp',
+        data() {
+          return {
+            message: 'wkb',
+            link: 'https://www.baidu.com',
+            isActive: false,
+            classObj: { active: false },
+          }
+        },
+        methods: {
+          toggle() {
+            this.isActive = !this.isActive
+            this.classObj.active = !this.classObj.active
+          },
+
+          getClassObj() {
+            return this.classObj
+          },
+        },
+      }
+
+      Vue.createApp(App).mount('#app')
+    </script>
+  </body>
+</html>

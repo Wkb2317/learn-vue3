@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script src="https://unpkg.com/vue@3"></script>
+
+    <template id="myapp">
+      <h2>{{message}}</h2>
+      <!-- 函数 传参-->
+      <!-- $event可以获取到事件发生时的对象 -->
+      <button @click="btnClick($event,'aaa')">点击</button>
+      <!-- 表达式 -->
+      <button @click="counter++">{{counter}}</button>
+      <!-- 对象 -->
+      <button v-on="{click: btnClick}">点击</button>
+    </template>
+
+    <script>
+      const App = {
+        template: '#myapp',
+        data() {
+          return {
+            message: 'wkb',
+            counter: 0,
+          }
+        },
+        methods: {
+          btnClick(event, value) {
+            console.log(event)
+            console.log(value)
+            console.log('鼠标点击')
+          },
+        },
+      }
+
+      Vue.createApp(App).mount('#app')
+    </script>
+  </body>
+</html>
