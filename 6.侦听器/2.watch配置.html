@@ -32,11 +32,12 @@
           }
         },
         watch: {
-          info: {
+          'info.name': {
             handler: function (newV, oldV) {
               console.log(newV, oldV)
             },
-            deep: true,
+            deep: true, // 深度侦听
+            // immediate: true, // 立即执行
           },
         },
         methods: {
@@ -44,6 +45,20 @@
             // this.info = { name: 'coder' }
             this.info.name = 'coder11'
           },
+        },
+        created() {
+          const unmount = this.$watch(
+            'info',
+            function (newV, oldV) {
+              console.log(newV, oldV)
+            },
+            {
+              deep: true,
+              immediate: true,
+            }
+          )
+
+          unmount()
         },
       }
 
