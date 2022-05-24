@@ -15,12 +15,10 @@
     <script src="https://unpkg.com/vue@3"></script>
 
     <template id="myapp">
-      <h2>{{fullName}}</h2>
-      <h2>{{fullName}}</h2>
-      <h2>{{fullName}}</h2>
-      <h2>{{fullName}}</h2>
-
-      <button @click="changeFirstName">修改firstname</button>
+      <h2>{{message}}</h2>
+      <input type="text" v-model="message" />
+      <button @click="answerQuestion">查找答案</button>
+      <p>{{answer}}</p>
     </template>
 
     <script>
@@ -29,22 +27,19 @@
         data() {
           return {
             message: 'wkb',
-            firstName: 'wang',
-            lastName: 'kangbao',
+            answer: '',
+            index: 0,
           }
         },
-        computed: {
-          fullName() {
-            // 只会执行一次
-            // 有缓存
-            // 会依赖改变数据，重新计算
-            console.log('computed中计算')
-            return this.firstName + this.lastName
+        watch: {
+          message(oldV, newV) {
+            this.answer = `answer: ${newV}`
           },
         },
         methods: {
-          changeFirstName() {
-            this.firstName = 'coder'
+          answerQuestion() {
+            this.index = this.index + 1
+            this.answer = `coder${this.index}`
           },
         },
       }

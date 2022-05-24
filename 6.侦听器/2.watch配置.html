@@ -15,12 +15,8 @@
     <script src="https://unpkg.com/vue@3"></script>
 
     <template id="myapp">
-      <h2>{{fullName}}</h2>
-      <h2>{{fullName}}</h2>
-      <h2>{{fullName}}</h2>
-      <h2>{{fullName}}</h2>
-
-      <button @click="changeFirstName">修改firstname</button>
+      <h2>{{message}}</h2>
+      <button @click="changeinfo">changeinfo</button>
     </template>
 
     <script>
@@ -29,22 +25,24 @@
         data() {
           return {
             message: 'wkb',
-            firstName: 'wang',
-            lastName: 'kangbao',
+            info: {
+              name: 'wkb',
+              age: 12,
+            },
           }
         },
-        computed: {
-          fullName() {
-            // 只会执行一次
-            // 有缓存
-            // 会依赖改变数据，重新计算
-            console.log('computed中计算')
-            return this.firstName + this.lastName
+        watch: {
+          info: {
+            handler: function (newV, oldV) {
+              console.log(newV, oldV)
+            },
+            deep: true,
           },
         },
         methods: {
-          changeFirstName() {
-            this.firstName = 'coder'
+          changeinfo() {
+            // this.info = { name: 'coder' }
+            this.info.name = 'coder11'
           },
         },
       }

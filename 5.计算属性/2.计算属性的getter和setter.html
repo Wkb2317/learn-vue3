@@ -34,17 +34,26 @@
           }
         },
         computed: {
-          fullName() {
-            // 只会执行一次
-            // 有缓存
-            // 会依赖改变数据，重新计算
-            console.log('computed中计算')
-            return this.firstName + this.lastName
+          // fullName() {
+          // 只会执行一次
+          // 有缓存
+          // 会依赖改变数据，重新计算
+          //   console.log('computed中计算')
+          //   return this.firstName + this.lastName
+          // },
+          fullName: {
+            get: function () {
+              return this.firstName + this.lastName
+            },
+
+            set: function (newValue) {
+              this.firstName = newValue
+            },
           },
         },
         methods: {
           changeFirstName() {
-            this.firstName = 'coder'
+            this.fullName = 'coder'
           },
         },
       }
