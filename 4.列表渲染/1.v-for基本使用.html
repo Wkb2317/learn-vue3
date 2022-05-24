@@ -16,12 +16,17 @@
 
     <template id="myapp">
       <h2>{{message}}</h2>
-      <div @click="divClick">
-        <!-- .stop 阻止冒泡-->
-        <button @click.stop="btnClick">按钮</button>
+      <div v-for="(item,index) in movies" :key="item">
+        <p>{{index}}:{{item}}</p>
       </div>
 
-      <input @keyup.enter="input" type="text" />
+      <!-- 遍历对象 -->
+      <div v-for="(value,key,index) in info" :key="value">
+        {{index}},{{key}},{{value}}
+      </div>
+
+      <!-- 遍历数字 -->
+      <div v-for="(num,index) in 9" :key="num">{{num}},{{index}}</div>
     </template>
 
     <script>
@@ -30,19 +35,15 @@
         data() {
           return {
             message: 'wkb',
+            movies: ['奇迹笨小孩', '这个杀手不太冷静', '淘金'],
+            info: {
+              name: 'code',
+              age: 12,
+              height: 1.8,
+            },
           }
         },
-        methods: {
-          divClick() {
-            console.log('divClick')
-          },
-          btnClick() {
-            console.log('btnClick')
-          },
-          input(event) {
-            console.log(event)
-          },
-        },
+        methods: {},
       }
 
       Vue.createApp(App).mount('#app')
