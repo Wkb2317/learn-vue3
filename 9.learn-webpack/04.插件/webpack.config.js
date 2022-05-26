@@ -1,10 +1,16 @@
 const path = require('path')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { DefinePlugin } = require('webpack')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry: './src/main.js',
+  // mode: 'development',
+  devtool: 'source-map', // 简历js映射文件
   output: {
     path: path.resolve(__dirname, './build'),
-    filename: 'bundle.js',
+    filename: 'js/bundle.js',
   },
   module: {
     rules: [
@@ -49,7 +55,7 @@ module.exports = {
         },
         parser: {
           dataUrlCondition: {
-            maxSize: 1000 * 1024,
+            maxSize: 10 * 1024,
           },
         },
       },
@@ -63,4 +69,25 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      title: '黑喂狗',
+    }),
+    new DefinePlugin({
+      BASE_URL: "'./'",
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: 'public',
+          // to: 'build',
+          globOptions: {
+            ignore: ['**/index.html'],
+          },
+        },
+      ],
+    }),
+  ],
 }
