@@ -1,1 +1,0 @@
-(()=>{var o={640:o=>{o.exports={sum:function(){console.log("sum")}}}},r={};function s(t){var e=r[t];if(void 0!==e)return e.exports;var n=r[t]={exports:{}};return o[t](n,n.exports,s),n.exports}(()=>{"use strict";const{sum:o}=s(640);console.log("formData"),o()})()})();
