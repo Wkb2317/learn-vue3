@@ -6,12 +6,21 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader/dist/index')
 
 module.exports = {
+  target: 'web',
+  mode: 'development',
   entry: './src/main.js',
-  // mode: 'development',
   devtool: 'source-map', // 简历js映射文件
   output: {
     path: path.resolve(__dirname, './build'),
     filename: 'js/bundle.js',
+  },
+  devServer: {
+    // 默认路径是public文件夹
+    // contentBase: './public', // webpack5 被移除
+    // static: false // 替代方式
+    hot: true, // 热更新，代码修改时，浏览器会自动刷新
+    port: 8000, // 本地服务器端口
+    open: true, // 是否自动打浏览器
   },
   module: {
     rules: [
@@ -52,7 +61,6 @@ module.exports = {
         type: 'asset',
         generator: {
           filename: 'img/[name]_[hash:6][ext]',
-          publicPath: '../build/',
         },
         parser: {
           dataUrlCondition: {
@@ -65,7 +73,6 @@ module.exports = {
         type: 'asset/resource',
         generator: {
           filename: 'font/[name]_[hash:6][ext]',
-          publicPath: '../build/',
         },
       },
       {
@@ -101,17 +108,16 @@ module.exports = {
       __VUE_OPTIONS_API__: true,
       __VUE_PROD_DEVTOOLS__: false,
     }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: 'public',
-          // to: 'build',
-          globOptions: {
-            ignore: ['**/index.html'],
-          },
-        },
-      ],
-    }),
+    // new CopyWebpackPlugin({
+    //   patterns: [
+    //     {
+    //       from: 'public',
+    //       globOptions: {
+    //         ignore: ['**/index.html'],
+    //       },
+    //     },
+    //   ],
+    // }),
 
     new VueLoaderPlugin(),
   ],
