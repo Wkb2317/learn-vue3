@@ -26,6 +26,7 @@ specifiers:
   webpack: ^5.72.1
   webpack-cli: ^4.9.2
   webpack-dev-server: ^4.9.0
+  webpack-merge: ^5.8.0
 
 dependencies:
   less: 4.1.2
@@ -55,6 +56,7 @@ devDependencies:
   webpack: 5.72.1_webpack-cli@4.9.2
   webpack-cli: 4.9.2_158fede7a4a6cac230ff2acad2bc4fff
   webpack-dev-server: 4.9.0_webpack-cli@4.9.2+webpack@5.72.1
+  webpack-merge: 5.8.0
 
 packages:
 
@@ -3231,7 +3233,7 @@ packages:
     dev: true
 
   /isobject/3.0.1:
-    resolution: {integrity: sha1-TkMekrEalzFjaqH5yNHMvP2reN8=}
+    resolution: {integrity: sha512-WhB9zCku7EGTj/HQQRz5aUQEUeoQZH2bWcltRErOpymJ4boYE6wL9Tbr23krRPSZ+C5zqNSrSw+Cc7sZZ4b7vg==}
     engines: {node: '>=0.10.0'}
     dev: true
 
