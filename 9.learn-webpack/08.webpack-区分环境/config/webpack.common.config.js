@@ -1,5 +1,4 @@
 const path = require('path')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { DefinePlugin } = require('webpack')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -7,27 +6,19 @@ const { VueLoaderPlugin } = require('vue-loader/dist/index')
 
 module.exports = {
   target: 'web',
-  mode: 'development',
+
   entry: './src/main.js',
-  devtool: 'source-map', // 简历js映射文件
   output: {
     path: path.resolve(__dirname, './build'),
     filename: 'js/bundle.js',
   },
-  devServer: {
-    // 默认路径是public文件夹
-    // contentBase: './public', // webpack5 被移除
-    // static: false // 替代方式
-    hot: true, // 热更新，代码修改时，浏览器会自动刷新
-    port: 8000, // 本地服务器端口
-    open: true, // 是否自动打浏览器
-  },
+
   resolve: {
     // 文件后缀名
     extensions: ['.js', '.json', '.wasm', '.vue', '.jsx', '.ts', 'tsx'],
     // 配置别名
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      '@': path.resolve(__dirname, '../src'),
     },
   },
   module: {
@@ -106,7 +97,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
+
     new HtmlWebpackPlugin({
       template: './public/index.html',
       title: '黑喂狗',
