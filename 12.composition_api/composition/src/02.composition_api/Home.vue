@@ -22,7 +22,7 @@ export default {
       age: 12,
     });
     const info2 = ref({
-      name: "wkb", 
+      name: "wkb",
       age: 12,
     });
     // 传递给子组件
