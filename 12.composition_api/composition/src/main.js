@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import App from './06.依赖注入/App.vue'
+import App from './08.setup顶部编写/App.vue'
 
 const app = createApp(App)
 
