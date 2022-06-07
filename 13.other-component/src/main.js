@@ -1,4 +1,13 @@
 import { createApp } from 'vue'
-import App from './02.jsx/App.vue'
+import App from './03.自定义指令/App.vue'
 
-createApp(App).mount('#app')
+const app = createApp(App)
+
+// 全局自定义指令
+app.directive('focus', {
+  mounted(el) {
+    el.focus()
+  },
+})
+
+app.mount('#app')
