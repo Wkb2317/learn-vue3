@@ -1,7 +1,6 @@
 <template>
   <div>
     <input type="text" v-focus v-wkb.trim="'coder'" />
-    <div v-formatTime="'/'">{{ tempdate }}</div>
   </div>
 </template>
 
@@ -36,14 +35,6 @@ export default {
         console.log("unmounted");
       },
     },
-  },
-
-  setup() {
-    const tempdate = 1654600212;
-
-    return {
-      tempdate,
-    };
   },
 };
 </script>
