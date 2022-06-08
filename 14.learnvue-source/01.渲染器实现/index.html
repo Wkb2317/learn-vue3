@@ -11,15 +11,23 @@
     <script src="./renderer.js"></script>
     <script>
       // 1. h函数返回vnode
-      const vnode = h('div', null, [
-        h('button', null, '点击'),
+      const vnode1 = h('div', { class: 'wkb', id: 'aaa', name: 'wkb' }, [
+        h('button', null, '点击12'),
         h('p', null, '当前计数'),
+        h('h2', null, '马上要被移除喽'),
       ])
 
       // 2. 通过mount函数，将vnode挂载到app上
-      mount(vnode, document.querySelector('#app'))
+      mount(vnode1, document.querySelector('#app'))
 
-      console.log(vnode)
+      const vnode2 = h('div', { class: 'coder', id: 'bbb' }, [
+        h('button', null, '点击'),
+        h('p', null, '哈哈哈'),
+      ])
+
+      setTimeout(() => {
+        patch(vnode1, vnode2)
+      }, 2000)
     </script>
   </body>
 </html>
