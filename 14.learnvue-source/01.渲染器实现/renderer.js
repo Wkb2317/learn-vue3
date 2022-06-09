@@ -17,11 +17,10 @@ const mount = (vnode, container) => {
 
       if (key.startsWith('on')) {
         // 监听事件
-        el.addEventListener(key.slice(2).toLowerCase, value)
+        el.addEventListener(key.slice(2).toLowerCase(), value)
       } else {
         el.setAttribute(key, value)
       }
-      el.setAttribute(key, value)
     }
   }
 
@@ -61,7 +60,7 @@ const patch = (n1, n2) => {
       // 如果新节点的prop值与旧节点不同，则更新旧节点prop值
       if (newProps[key] !== oldProps[key]) {
         if (key.startsWith('on')) {
-          el.addEventListener(key.slice(2).toLowerCase, newProps[key])
+          el.addEventListener(key.slice(2).toLowerCase(), newProps[key])
         } else {
           el.setAttribute(key, newProps[key])
         }
@@ -70,12 +69,11 @@ const patch = (n1, n2) => {
 
     // 遍历旧节点，移除多余props
     for (let key in oldProps) {
+      if (key.startsWith('on')) {
+        el.removeEventListener(key.slice(2).toLowerCase(), oldProps[key])
+      }
       if (!(key in newProps)) {
-        if (key.startsWith('on')) {
-          el.removeEventListener(key.slice(2).toLowerCase, newProps[key])
-        } else {
-          el.removeAttribute(key)
-        }
+        el.removeAttribute(key)
       }
     }
 
