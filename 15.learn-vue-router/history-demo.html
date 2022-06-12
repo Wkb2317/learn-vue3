@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <a href="/home">home</a>
+      <a href="/about">about</a>
+      <div class="content"></div>
+    </div>
+
+    <script>
+      const content = document.querySelector('.content')
+
+      const a = document.querySelectorAll('a')
+      for (let item of a) {
+        item.addEventListener('click', event => {
+          event.preventDefault()
+          const href = item.getAttribute('href')
+          console.log(href)
+
+          history.pushState({}, '', href)
+
+          content.innerHTML = location.pathname
+        })
+      }
+    </script>
+  </body>
+</html>
