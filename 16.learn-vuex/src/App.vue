@@ -1,14 +1,33 @@
 <template>
   <div>
-    <h2>{{ $store.state.counter }}</h2>
+    <h2>{{ counter }}</h2>
     <button @click="add">+</button>
     <button @click="sup">-</button>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'App',
+  data() {
+    return {
+      name: 'wkb'
+    }
+  },
+  // computed: mapState({
+  //   counter(state) {
+  //     return state.counter
+  //   }
+  // }),
+
+  computed: {
+    myname() {
+      return this.name
+    },
+    ...mapState(['counter'])
+  },
   methods: {
     add() {
       this.$store.commit('add', 1)
