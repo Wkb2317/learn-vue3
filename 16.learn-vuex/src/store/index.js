@@ -1,11 +1,13 @@
 import { createStore } from 'vuex'
-
+import user from './modlues/user'
+import home from './modlues/home'
 const store = createStore({
   state() {
     return {
       counter: 0,
       name: 'wkb',
       age: 18,
+      rootCounter: 1,
       books: [
         { name: '小霸王', price: 12, count: 10 },
         { name: '小王子', price: 16, count: 20 },
@@ -43,7 +45,35 @@ const store = createStore({
     },
     sup(state, payload) {
       state.counter -= payload
+    },
+    changeRootCounter(state) {
+      state.rootCounter++
     }
+  },
+  actions: {
+    actionA() {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          resolve(1)
+        }, 1000)
+      })
+    },
+
+    async addAction({ commit, dispatch }, payload) {
+      const res = await dispatch('actionA')
+      if (res) {
+        commit('add', payload)
+      }
+    },
+    supAction({ commit }, payload) {
+      setTimeout(() => {
+        commit('sup', payload)
+      }, 1000)
+    }
+  },
+  modules: {
+    user,
+    home
   }
 })
 

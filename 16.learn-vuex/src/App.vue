@@ -1,78 +1,24 @@
 <template>
   <div>
-    <h2>{{ counter }}</h2>
-    <h2>{{ name }}</h2>
-    <h2>{{ age }}</h2>
-    <button @click="add(1)">+</button>
-    <button @click="sup(-1)">-</button>
+    <h2>root:{{ rootCounter }}</h2>
+    <h2>home:{{ homeCounter }}</h2>
+    <h2>user:{{ userAge }}</h2>
 
-    <h2>totalPrice:{{ totalPrice }}</h2>
-    <h2>totalPriceGreateA:{{ totalPriceCountGreaterN }}</h2>
+    <button @click="homeAdd">home+</button>
   </div>
 </template>
 
-<script>
-// export default {
-//   name: 'App',
-//   data() {
-//     return {
-//       name: 'wkb'
-//     }
-//   },
-// computed: mapState({
-//   counter(state) {
-//     return state.counter
-//   }
-// }),
-
-//   computed: {
-//     myname() {
-//       return this.name
-//     },
-//     ...mapState(['counter'])
-//   },
-//   methods: {
-//     add() {
-//       this.$store.commit('add', 1)
-//     },
-//     sup() {
-//       this.$store.commit('sup', 1)
-//     }
-//   }
-// }
+<script setup>
 import { computed } from 'vue'
-import { useStore, mapMutations } from 'vuex'
-import useState from './hook/useState'
-import useGetters from './hook/useGetters'
-export default {
-  setup() {
-    const store = useStore()
-    const stateObj = useState(['counter', 'name', 'age'])
-    const gettersObj = useGetters(['totalPrice', 'currentDiscount'])
+import { useStore } from 'vuex'
 
-    // const totalPriceCountGreaterN = computed(() =>
-    //   store.getters.totalPriceCountGreaterN(20)
-    // )
-    const totalPriceCountGreaterN = computed(() =>
-      store.getters.totalPriceCountGreaterN(10)
-    )
+const store = useStore()
+const rootCounter = computed(() => store.state.rootCounter)
+const homeCounter = computed(() => store.state.home.homeCounter)
+const userAge = computed(() => store.state.user.age)
 
-    const storeMutations = mapMutations(['add', 'sup'])
-
-    // function add() {
-    //   store.commit('add', 1)
-    // }
-    // function sup() {
-    //   store.commit('sup', 1)
-    // }
-
-    return {
-      ...stateObj,
-      ...gettersObj,
-      ...storeMutations,
-      totalPriceCountGreaterN
-    }
-  }
+const homeAdd = () => {
+  store.commit('home/changeHomeCounter')
 }
 </script>
 
