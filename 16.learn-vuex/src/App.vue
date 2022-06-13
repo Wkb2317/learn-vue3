@@ -1,39 +1,76 @@
 <template>
   <div>
     <h2>{{ counter }}</h2>
-    <button @click="add">+</button>
-    <button @click="sup">-</button>
+    <h2>{{ name }}</h2>
+    <h2>{{ age }}</h2>
+    <button @click="add(1)">+</button>
+    <button @click="sup(-1)">-</button>
+
+    <h2>totalPrice:{{ totalPrice }}</h2>
+    <h2>totalPriceGreateA:{{ totalPriceCountGreaterN }}</h2>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+// export default {
+//   name: 'App',
+//   data() {
+//     return {
+//       name: 'wkb'
+//     }
+//   },
+// computed: mapState({
+//   counter(state) {
+//     return state.counter
+//   }
+// }),
 
+//   computed: {
+//     myname() {
+//       return this.name
+//     },
+//     ...mapState(['counter'])
+//   },
+//   methods: {
+//     add() {
+//       this.$store.commit('add', 1)
+//     },
+//     sup() {
+//       this.$store.commit('sup', 1)
+//     }
+//   }
+// }
+import { computed } from 'vue'
+import { useStore, mapMutations } from 'vuex'
+import useState from './hook/useState'
+import useGetters from './hook/useGetters'
 export default {
-  name: 'App',
-  data() {
-    return {
-      name: 'wkb'
-    }
-  },
-  // computed: mapState({
-  //   counter(state) {
-  //     return state.counter
-  //   }
-  // }),
+  setup() {
+    const store = useStore()
+    const stateObj = useState(['counter', 'name', 'age'])
+    const gettersObj = useGetters(['totalPrice', 'currentDiscount'])
 
-  computed: {
-    myname() {
-      return this.name
-    },
-    ...mapState(['counter'])
-  },
-  methods: {
-    add() {
-      this.$store.commit('add', 1)
-    },
-    sup() {
-      this.$store.commit('sup', 1)
+    // const totalPriceCountGreaterN = computed(() =>
+    //   store.getters.totalPriceCountGreaterN(20)
+    // )
+    const totalPriceCountGreaterN = computed(() =>
+      store.getters.totalPriceCountGreaterN(10)
+    )
+
+    const storeMutations = mapMutations(['add', 'sup'])
+
+    // function add() {
+    //   store.commit('add', 1)
+    // }
+    // function sup() {
+    //   store.commit('sup', 1)
+    // }
+
+    return {
+      ...stateObj,
+      ...gettersObj,
+      ...storeMutations,
+      totalPriceCountGreaterN
     }
   }
 }
